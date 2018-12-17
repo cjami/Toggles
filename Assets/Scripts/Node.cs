@@ -1,27 +1,28 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using GeoCoordinatePortable;
 
 public class Node
 {
-    private float latitude;
-    private float longitude;
+    private string id;
+    private GeoCoordinate coordinates;
     private string type;
     private bool fill;
 
-    public float Latitude
+    public string Id
     {
         get
         {
-            return latitude;
+            return id;
         }
     }
 
-    public float Longitude
+    public GeoCoordinate Coordinates
     {
         get
         {
-            return longitude;
+            return coordinates;
         }
     }
 
@@ -41,10 +42,28 @@ public class Node
         }
     }
 
-    public Node(float latitude, float longitude, string type)
+    public Node(string id, float latitude, float longitude, string type)
     {
-        this.latitude = latitude;
-        this.longitude = longitude;
+        this.id = id;
+        this.coordinates = new GeoCoordinate(latitude, longitude);
         this.type = type;
+    }
+
+    // override object.Equals
+    public override bool Equals(object obj)
+    {
+        if (obj == null || GetType() != obj.GetType())
+        {
+            return false;
+        }
+
+        Node otherNode = (Node)obj;
+        return id.Equals(otherNode.id);
+    }
+
+    // override object.GetHashCode
+    public override int GetHashCode()
+    {
+        return id.GetHashCode();
     }
 }

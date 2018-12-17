@@ -6,32 +6,34 @@ using System;
 public class GeoUnityService : GeoService
 {
     private float[] currentLocation;
-    private bool requesting;
-
-    public GeoUnityService()
-    {
-        Input.compass.enabled = true;
-    }
+    private bool tracking;
 
     public float CurrentHeading()
     {
         return Input.compass.trueHeading;
     }
 
-    public void RequestLocation(MonoBehaviour behaviour, Action callback)
+    public void RequestLocationTracking(MonoBehaviour behaviour)
     {
-        behaviour.StartCoroutine(LocationAttempt(callback));
+        if (!tracking)
+        {
+            behaviour.StartCoroutine(StartLocationTracking());
+        }
     }
 
     public float[] CurrentLocation()
     {
-        return currentLocation;
+        return new float[] { Input.location.lastData.latitude, Input.location.lastData.longitude };
     }
 
-    IEnumerator LocationAttempt(Action callback)
+    public bool IsTracking()
     {
-        requesting = true;
+        return tracking;
+    }
 
+    IEnumerator StartLocationTracking()
+    {
+        Input.compass.enabled = true;
         Input.location.Start();
 
         // Give service time to fire up
@@ -54,19 +56,8 @@ public class GeoUnityService : GeoService
         }
         else
         {
-            // Got location
-            if (currentLocation == null)
-            {
-                currentLocation = new float[2];
-            }
-            currentLocation[0] = Input.location.lastData.latitude;
-            currentLocation[1] = Input.location.lastData.longitude;
+            // All good - we're tracking now
+            tracking = true;
         }
-
-        // Stop continous location tracking
-        Input.location.Stop();
-
-        // Done here, do callback - data can be retrieved with CurrentLocation()
-        callback();
     }
 }

@@ -6,15 +6,15 @@ using System;
 
 public class ContentManager : Singleton<ContentManager>
 {
-    private const string CONTENT_BASE_URI = "";
+    private const string CONTENT_BASE_URI = "https://s3.eu-west-2.amazonaws.com/toggles";
     private AssetBundleManager assetBundleManager;
     private bool init;
 
     void Start()
     {
         assetBundleManager = new AssetBundleManager();
-        assetBundleManager.Initialize(OnInitializeComplete);
         assetBundleManager.SetBaseUri(CONTENT_BASE_URI);
+        assetBundleManager.Initialize(OnInitializeComplete);
     }
 
     public bool GetContent(string name, Action<AssetBundle> callback)

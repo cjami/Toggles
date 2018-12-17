@@ -5,7 +5,8 @@ using System;
 
 public interface GeoService
 {
-    void RequestLocation(MonoBehaviour behaviour, Action callback);
+    void RequestLocationTracking(MonoBehaviour behaviour);
+    bool IsTracking();
     float[] CurrentLocation();
     float CurrentHeading();
 }

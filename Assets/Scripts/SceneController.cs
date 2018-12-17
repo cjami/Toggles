@@ -5,6 +5,8 @@ using GoogleARCore;
 
 public class SceneController : MonoBehaviour
 {
+    public NodeViewer nodeViewer;
+
     void Start()
     {
         QuitOnConnectionErrors();
@@ -21,6 +23,24 @@ public class SceneController : MonoBehaviour
         }
 
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
+
+        FindActivePlane();
+    }
+
+    void FindActivePlane()
+    {
+        TrackableHit hit;
+        TrackableHitFlags raycastFilter = TrackableHitFlags.PlaneWithinBounds | TrackableHitFlags.PlaneWithinPolygon;
+
+        if (Frame.Raycast(Screen.width / 2, Screen.height / 2, raycastFilter, out hit))
+        {
+            SelectPlane(hit.Trackable as DetectedPlane);
+        }
+    }
+
+    void SelectPlane(DetectedPlane selectedPlane)
+    {
+        nodeViewer.SetSelectedPlane(selectedPlane);
     }
 
     private void QuitOnConnectionErrors()

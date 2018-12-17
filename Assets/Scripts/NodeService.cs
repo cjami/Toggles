@@ -1,9 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public interface NodeService
 {
-    List<Node> GetNearbyNodes(float latitude, float longitude);
-    void AddNode(float latitude, float longitude, string type, bool fill);
+    void Authenticate(Action<bool> callback);
+    void GetNearbyNodes(float latitude, float longitude, Action<bool, List<Node>> callback);
+    void AddNode(float latitude, float longitude, string type, bool fill, Action<bool> callback);
 }

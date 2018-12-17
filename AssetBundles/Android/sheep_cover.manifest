@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 3523914391
+CRC: 510395786
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 977a3342bb9779363e2f1228ce791e40
+    Hash: 2997802d01dbea248cf3e1f33da3bd96
   TypeTreeHash:
     serializedVersion: 2
     Hash: b47daa45b0a0c0462557122c777a86e3
@@ -30,7 +30,7 @@ ClassTypes:
 - Class: 215
   Script: {instanceID: 0}
 Assets:
-- Assets/AssetBundles/SheepCover/SheepCoverSphere.prefab
-- Assets/AssetBundles/SheepCover/SheepCoverMat.mat
-- Assets/AssetBundles/SheepCover/SheepCoverCubemap.cubemap
+- Assets/ExternalContent/SheepCover/Cover.prefab
+- Assets/ExternalContent/SheepCover/SheepCoverMat.mat
+- Assets/ExternalContent/SheepCover/SheepCoverCubemap.cubemap
 Dependencies: []

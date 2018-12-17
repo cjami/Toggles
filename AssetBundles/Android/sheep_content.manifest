@@ -1,0 +1,40 @@
+ManifestFileVersion: 0
+CRC: 925680649
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: e33c3d0debb1bd24e3156f94cb4ef241
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 40dbe2ffe7552a562b4241d9041caa45
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 23
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 33
+  Script: {instanceID: 0}
+- Class: 43
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 74
+  Script: {instanceID: 0}
+- Class: 90
+  Script: {instanceID: 0}
+- Class: 95
+  Script: {instanceID: 0}
+Assets:
+- Assets/ExternalContent/SheepContent/Models/Sheep/Sheep.obj
+- Assets/ExternalContent/SheepContent/Models/Sheep/Texture/Body.png
+- Assets/ExternalContent/SheepContent/Materials/RefRep.145_Body.png.mat
+- Assets/ExternalContent/SheepContent/Models/Sheep/Sheep Image.png
+- Assets/ExternalContent/SheepContent/Models/Sheep/Sheep.blend
+Dependencies: []
