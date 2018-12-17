@@ -70,6 +70,8 @@ public class NodeManager : Singleton<NodeManager>
 
                     this.nodes = nodes;
 
+                    Debug.Log("Successfully retrieved nodes: " + nodes.Count);
+
                     if (OnNodeListUpdate != null)
                     {
                         OnNodeListUpdate();

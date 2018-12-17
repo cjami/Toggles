@@ -47,9 +47,9 @@ public class NodeController : MonoBehaviour
         if (bundle != null)
         {
             // Attach our cover to current position
-            GameObject cover = bundle.LoadAsset<GameObject>("Cover");
-            cover.transform.position = Vector3.zero;
+            GameObject cover = Instantiate(bundle.LoadAsset<GameObject>("Cover"));
             cover.transform.SetParent(gameObject.transform);
+            cover.transform.localPosition = Vector3.zero;
 
             // Proceed to retrieve content
             ContentManager.Instance.GetContent(node.Type + "_content", OnContentLoaded);
@@ -62,8 +62,8 @@ public class NodeController : MonoBehaviour
         {
             bundle.LoadAllAssets(); // Should be done async
 
-			// Proceed to retrieve scene
-			ContentManager.Instance.GetContent(node.Type + "_scene", OnSceneLoaded);
+            // Proceed to retrieve scene
+            ContentManager.Instance.GetContent(node.Type + "_scene", OnSceneLoaded);
         }
     }
 

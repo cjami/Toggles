@@ -22,7 +22,8 @@ GameObject:
   - component: {fileID: 33616346723638704}
   - component: {fileID: 135638680614742028}
   - component: {fileID: 23114066303503572}
-  m_Layer: 0
+  - component: {fileID: 114647858639366166}
+  m_Layer: 8
   m_Name: Cover
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,7 +39,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4857418126598024}
   - component: {fileID: 215651766084173200}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Reflection Probe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -113,6 +114,17 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1036797633133088}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &114647858639366166
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1036797633133088}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8916685cdae12f4e8f752e8495799c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!135 &135638680614742028
 SphereCollider:
   m_ObjectHideFlags: 1

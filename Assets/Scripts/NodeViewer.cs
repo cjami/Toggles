@@ -8,7 +8,6 @@ using GeoCoordinatePortable;
 public class NodeViewer : MonoBehaviour
 {
     public Camera FirstPersonCamera;
-    private const float NODE_PLACEMENT_DISTANCE = 1f;
     private const float NODE_PLACEMENT_HEIGHT = 0.5f;
     private List<Node> nodes = new List<Node>();
     private Anchor targetAnchor;
@@ -44,23 +43,13 @@ public class NodeViewer : MonoBehaviour
         {
             detectedPlane = detectedPlane.SubsumedBy;
         }
-
-        if (targetNodeObj != null)
-        {
-            // Keep y-position consistent with plane
-            float yPos = detectedPlane.CenterPose.position.y + NODE_PLACEMENT_HEIGHT;
-            targetNodeObj.transform.position = new Vector3(transform.position.x, yPos, transform.position.z);
-        }
     }
 
     public void SetSelectedPlane(DetectedPlane detectedPlane)
     {
-        if (this.detectedPlane != detectedPlane)
-        {
-            this.detectedPlane = detectedPlane;
-        }
+        this.detectedPlane = detectedPlane;
 
-        if (targetNodeObj == null)
+        if (targetNode != null && targetNodeObj == null)
         {
             PlaceNodeObject();
         }
@@ -88,14 +77,16 @@ public class NodeViewer : MonoBehaviour
     private void DetectNodeTouch()
     {
         // Detect node touches
-        if (Input.touchCount == 1 && Input.GetTouch(0).phase == TouchPhase.Began)
+        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
         {
+            Debug.Log("Touch detected");
             Ray ray = FirstPersonCamera.ScreenPointToRay(Input.GetTouch(0).position);
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit, 10f, LayerMask.NameToLayer("Node")))
             {
+                Debug.Log("Node hit");
                 // Hit a node - get node controller and press it
-                NodeController nodeController = hit.collider.gameObject.GetComponent<NodeController>();
+                NodeController nodeController = hit.collider.gameObject.GetComponentInParent<NodeController>();
                 nodeController.Touch();
             }
         }
@@ -130,23 +121,22 @@ public class NodeViewer : MonoBehaviour
     {
         // Place a node in front of user on top of the detected plane
         // Anchor above center of detected plane
-        Vector3 centerPos = detectedPlane.CenterPose.position;
-        Vector3 anchorPosition = new Vector3(centerPos.x, centerPos.y + NODE_PLACEMENT_HEIGHT, centerPos.z);
+        Vector3 anchorPosition = detectedPlane.CenterPose.position;
 
         if (targetAnchor != null)
         {
             DestroyObject(targetAnchor);
         }
 
-        targetAnchor = detectedPlane.CreateAnchor(new Pose(anchorPosition, Quaternion.identity));
+        targetAnchor = detectedPlane.CreateAnchor(detectedPlane.CenterPose);
 
         // Create and position empty object that will be populated with downloaded node cover
         targetNodeObj = new GameObject("NodeHolder");
         targetNodeObj.transform.SetParent(targetAnchor.transform);
-        targetNodeObj.transform.localPosition = Vector3.zero;
+        targetNodeObj.transform.localPosition = new Vector3(0f, NODE_PLACEMENT_HEIGHT, 0f);
 
         // Add a node controller to it - this will take care of the rest
         NodeController nodeController = targetNodeObj.AddComponent<NodeController>();
-        nodeController.SetAndLoadNode(new Node("1", 1, 1, "sheep"));
+        nodeController.SetAndLoadNode(targetNode);
     }
 }

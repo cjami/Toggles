@@ -47,13 +47,15 @@ public class NodeGsService : NodeService
                 if (!response.HasErrors)
                 {
                     List<GSData> data = response.ScriptData.GetGSDataList("node");
-                    foreach (GSData nodeData in data)
+                    foreach (GSData baseData in data)
                     {
-                        string id = nodeData.GetString("_id");
-                        float lat = nodeData.GetFloat("latitude").Value;
-                        float lon = nodeData.GetFloat("longitude").Value;
+                        string id = baseData.GetString("id");
+
+                        GSData nodeData = baseData.GetGSData("data");
+                        float lat = float.Parse(nodeData.GetString("latitude"));
+                        float lon = float.Parse(nodeData.GetString("longitude"));
                         string type = nodeData.GetString("type");
-                        bool fill = nodeData.GetBoolean("fill").Value;
+                        bool fill = bool.Parse(nodeData.GetString("fill"));
 
                         Node node = new Node(id, lat, lon, type);
                         nodeList.Add(node);
