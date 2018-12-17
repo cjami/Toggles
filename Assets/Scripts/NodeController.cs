@@ -9,6 +9,7 @@ public class NodeController : MonoBehaviour
     private Node node;
     private AssetBundle sceneBundle;
     private bool touched;
+    private GameObject cover;
 
     public void SetAndLoadNode(Node node)
     {
@@ -32,14 +33,32 @@ public class NodeController : MonoBehaviour
         {
             // Grab scene and load it additively (async)
             SceneManager.LoadSceneAsync(scene, LoadSceneMode.Additive);
+            HideCover();
         }
         else
         {
             // Remove all elements of the scene
             SceneManager.UnloadSceneAsync(scene);
+            ShowCover();
         }
 
         touched = !touched; // Toggle
+    }
+
+    private void ShowCover()
+    {
+        if (cover != null)
+        {
+            GameObjectUtils.EnableRenderers(cover);
+        }
+    }
+
+    private void HideCover()
+    {
+        if (cover != null)
+        {
+            GameObjectUtils.DisableRenderers(cover);
+        }
     }
 
     private void OnCoverLoaded(AssetBundle bundle)
@@ -47,9 +66,10 @@ public class NodeController : MonoBehaviour
         if (bundle != null)
         {
             // Attach our cover to current position
-            GameObject cover = Instantiate(bundle.LoadAsset<GameObject>("Cover"));
+            cover = Instantiate(bundle.LoadAsset<GameObject>("Cover"));
             cover.transform.SetParent(gameObject.transform);
             cover.transform.localPosition = Vector3.zero;
+            cover.tag = "Node"; // This is used to reposition content - see MoveToTag
 
             // Proceed to retrieve content
             ContentManager.Instance.GetContent(node.Type + "_content", OnContentLoaded);

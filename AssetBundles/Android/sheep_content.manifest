@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 925680649
+CRC: 1722303606
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: e33c3d0debb1bd24e3156f94cb4ef241
+    Hash: 08d8c861a32532bf057e9f7fe2e5f691
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 40dbe2ffe7552a562b4241d9041caa45
+    Hash: 36f92c79f61e0f44502d266d720427fc
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -25,6 +25,8 @@ ClassTypes:
   Script: {instanceID: 0}
 - Class: 48
   Script: {instanceID: 0}
+- Class: 49
+  Script: {instanceID: 0}
 - Class: 74
   Script: {instanceID: 0}
 - Class: 90
@@ -34,6 +36,7 @@ ClassTypes:
 Assets:
 - Assets/ExternalContent/SheepContent/Models/Sheep/Sheep.obj
 - Assets/ExternalContent/SheepContent/Models/Sheep/Texture/Body.png
+- Assets/ExternalContent/SheepContent/Behaviours/Spin.BT.txt
 - Assets/ExternalContent/SheepContent/Materials/RefRep.145_Body.png.mat
 - Assets/ExternalContent/SheepContent/Models/Sheep/Sheep Image.png
 - Assets/ExternalContent/SheepContent/Models/Sheep/Sheep.blend

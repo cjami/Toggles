@@ -11,7 +11,7 @@ public class NodeManager : Singleton<NodeManager>
     private const float NODE_LIST_POLL_RATE = 5f;
     private List<Node> nodes = new List<Node>();
     private NodeService nodeService = new NodeGsService();
-    private GeoService geoService = new GeoUnityService();
+    private GeoService geoService = new GeoDummyService();
 
     public OnNodeListUpdateHandler OnNodeListUpdate;
 
@@ -69,8 +69,6 @@ public class NodeManager : Singleton<NodeManager>
                     }
 
                     this.nodes = nodes;
-
-                    Debug.Log("Successfully retrieved nodes: " + nodes.Count);
 
                     if (OnNodeListUpdate != null)
                     {

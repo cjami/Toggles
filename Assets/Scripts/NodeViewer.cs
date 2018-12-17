@@ -79,16 +79,22 @@ public class NodeViewer : MonoBehaviour
         // Detect node touches
         if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
         {
-            Debug.Log("Touch detected");
-            Ray ray = FirstPersonCamera.ScreenPointToRay(Input.GetTouch(0).position);
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit, 10f, LayerMask.NameToLayer("Node")))
+            if (targetNodeObj != null)
             {
-                Debug.Log("Node hit");
-                // Hit a node - get node controller and press it
-                NodeController nodeController = hit.collider.gameObject.GetComponentInParent<NodeController>();
+                NodeController nodeController = targetNodeObj.GetComponent<NodeController>();
                 nodeController.Touch();
             }
+
+
+            // Ray ray = FirstPersonCamera.ScreenPointToRay(Input.GetTouch(0).position);
+            // RaycastHit hit;
+            // if (Physics.Raycast(ray, out hit, 10f, LayerMask.NameToLayer("Node")))
+            // {
+            //     Debug.Log("Node hit");
+            //     // Hit a node - get node controller and press it
+            //     NodeController nodeController = hit.collider.gameObject.GetComponentInParent<NodeController>();
+            //     nodeController.Touch();
+            // }
         }
     }
 
@@ -121,7 +127,6 @@ public class NodeViewer : MonoBehaviour
     {
         // Place a node in front of user on top of the detected plane
         // Anchor above center of detected plane
-        Vector3 anchorPosition = detectedPlane.CenterPose.position;
 
         if (targetAnchor != null)
         {

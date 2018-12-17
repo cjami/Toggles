@@ -1,0 +1,7 @@
+tree("Root")
+    sequence
+        Rotate(45.0, 1.0)
+			repeat 
+				sequence
+        			Rotate(-90.0, 1.0)
+					Rotate(90.0, 1.0)
